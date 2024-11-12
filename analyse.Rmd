@@ -1,11 +1,14 @@
 ---
 title: "TP analyse reproductible"
 author: "Bineta FAYE"
-output: 
-  html_document :
-    toc : true
-
 date: "2024-11-12"
+output:
+  html_document:
+    toc: true
+  word_document:
+    toc: true
+  pdf_document:
+    toc: true
 ---
 
 ```{r setup, include=FALSE}
@@ -46,7 +49,8 @@ Documentation:https://github.com/rstudio/cheatsheets/blob/main/data-visualizatio
 ```{r}
 library(ggplot2)
 ggplot(df, aes(survived,fill=sex)) +
-  geom_bar(position = "dodge",width = 0.4)
+  geom_bar(position = "dodge",width = 0.4)+
+  theme_minimal()
 
 ```
 
@@ -59,7 +63,8 @@ ggplot(df, aes(passengerClass,fill=survived)) +
 
 ```{r}
 ggplot(df, aes(survived,age)) +
-  geom_boxplot()
+  geom_boxplot() +
+  theme_minimal()
 ```
 
 
@@ -83,6 +88,27 @@ Classe 3rd (passengerClass3rd = -2.289661) : Le coefficient négatif et encore p
 
 
 ## Création d’un Package R avec des fonctions d’Analyse
+
+Dans R/analyse_titanic.R, ajoute une fonction  pour calculer les taux de survie en fonction du sexe 
+
+```{r}
+library(dplyr)
+taux_survie_sex <- function(data) {
+  data %>%
+    group_by(sex) %>%
+    summarize(TauxSurvie = sum(survived == "yes") / n())
+}
+taux_survie_sex(df)
+```
+
+```{r}
+taux_survie_class <- function(data) {
+  data %>%
+    group_by(passengerClass) %>%
+    summarize(TauxSurvie = sum(survived == "yes") / n())
+}
+taux_survie_class(df)
+```
 
 
 ## Rapport Final et Partage
