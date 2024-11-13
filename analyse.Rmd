@@ -113,6 +113,21 @@ taux_survie_class(df)
 
 ## Rapport Final et Partage
 
+- devtools::create("TitanicPckg")
+- creation du fichier taux.R avec les fonctions
+- documentation: en-tete +  save et devtools::document("TitanicPckg")
+- devtools::build("TitanicPckg")
+- devtools::install("TitanicPckg")
 
+### Utilisation des fonctions de mon package
+
+```{r}
+library(TitanicPckg)
+taux_survie_sex(df)
+```
+
+```{r}
+TitanicPckg::taux_survie_class(df)
+```
 
 

@@ -364,7 +364,11 @@ du Projet sur GitHub et Clonage Local: fait!</a></li>
 d’un Rapport d’Analyse dans un Document RMarkdown</a></li>
 <li><a href="#création-dun-package-r-avec-des-fonctions-danalyse" id="toc-création-dun-package-r-avec-des-fonctions-danalyse">Création
 d’un Package R avec des fonctions d’Analyse</a></li>
-<li><a href="#rapport-final-et-partage" id="toc-rapport-final-et-partage">Rapport Final et Partage</a></li>
+<li><a href="#rapport-final-et-partage" id="toc-rapport-final-et-partage">Rapport Final et Partage</a>
+<ul>
+<li><a href="#utilisation-des-fonctions-de-mon-package" id="toc-utilisation-des-fonctions-de-mon-package">Utilisation des
+fonctions de mon package</a></li>
+</ul></li>
 </ul>
 </div>
 
@@ -505,6 +509,36 @@ taux_survie_class(df)</code></pre>
 </div>
 <div id="rapport-final-et-partage" class="section level2">
 <h2>Rapport Final et Partage</h2>
+<ul>
+<li>devtools::create(“TitanicPckg”)</li>
+<li>creation du fichier taux.R avec les fonctions</li>
+<li>documentation: en-tete + save et
+devtools::document(“TitanicPckg”)</li>
+<li>devtools::build(“TitanicPckg”)</li>
+<li>devtools::install(“TitanicPckg”)</li>
+</ul>
+<div id="utilisation-des-fonctions-de-mon-package" class="section level3">
+<h3>Utilisation des fonctions de mon package</h3>
+<pre class="r"><code>library(TitanicPckg)</code></pre>
+<pre><code>## 
+## Attachement du package : &#39;TitanicPckg&#39;</code></pre>
+<pre><code>## Les objets suivants sont masqués _par_ &#39;.GlobalEnv&#39;:
+## 
+##     taux_survie_class, taux_survie_sex</code></pre>
+<pre class="r"><code>taux_survie_sex(df)</code></pre>
+<pre><code>## # A tibble: 2 × 2
+##   sex    TauxSurvie
+##   &lt;fct&gt;       &lt;dbl&gt;
+## 1 female      0.727
+## 2 male        0.191</code></pre>
+<pre class="r"><code>TitanicPckg::taux_survie_class(df)</code></pre>
+<pre><code>## # A tibble: 3 × 2
+##   passengerClass TauxSurvie
+##   &lt;fct&gt;               &lt;dbl&gt;
+## 1 1st                 0.619
+## 2 2nd                 0.430
+## 3 3rd                 0.255</code></pre>
+</div>
 </div>
 
 
