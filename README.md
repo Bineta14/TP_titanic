@@ -1,4 +1,5 @@
 # TP_titanic
+email: bineta.faye@chru-strasbourg.fr
 TP du cours d'analyse reproductible
 
 Ici la correction du tp ;)
