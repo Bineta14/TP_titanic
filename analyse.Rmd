@@ -1,0 +1,133 @@
+---
+title: "TP analyse reproductible"
+author: "Bineta FAYE"
+date: "2024-11-12"
+output:
+  html_document:
+    toc: true
+  word_document:
+    toc: true
+  pdf_document:
+    toc: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+ 
+
+Dataset Titanic de carData
+
+## Initialisation du Projet sur GitHub et Clonage Local: fait!
+
+## Création d’un Rapport d’Analyse dans un Document RMarkdown
+
+```{r}
+library(carData)
+df<-TitanicSurvival
+summary(df)
+```
+
+
+
+
+```{r}
+plot(df$survived~df$sex, col=c("orange","lightgreen"))
+plot(df$survived~df$passengerClass)
+```
+
+
+
+```{r}
+plot(df$age~df$survived)
+```
+
+#### Tracés avec ggplot2
+
+Documentation:https://github.com/rstudio/cheatsheets/blob/main/data-visualization.pdf
+
+```{r}
+library(ggplot2)
+ggplot(df, aes(survived,fill=sex)) +
+  geom_bar(position = "dodge",width = 0.4)+
+  theme_minimal()
+
+```
+
+```{r}
+ggplot(df, aes(passengerClass,fill=survived)) +
+  geom_bar(position = "dodge",width = 0.3)+
+  scale_fill_brewer(palette = "Blues")
+```
+
+
+```{r}
+ggplot(df, aes(survived,age)) +
+  geom_boxplot() +
+  theme_minimal()
+```
+
+
+```{r}
+y<-as.numeric(df$survived)-1
+summary(glm(y~age+sex+passengerClass , data=df,family = binomial(link = "logit")))
+```
+
+
+
+
+**Age (-0.034393) : Ce coefficient est négatif, ce qui indique que l'âge a un effet défavorable sur la survie : à chaque année supplémentaire, le logit de la probabilité de survie diminue d'environ 0.0344, soit une réduction de la probabilité de survie. Ce coefficient est significatif (p < 0.001).**
+
+**Sexe masculin (sexmale = -2.497845) : Ce coefficient négatif indique que le fait d'être de sexe masculin réduit considérablement la probabilité de survie par rapport au sexe féminin, qui est la catégorie de référence. L’effet est très significatif (p < 0.001), et il semble que les hommes aient eu une probabilité de survie bien plus faible que les femmes dans ce contexte.**
+
+**Classe de passager :**
+
+**Classe 2nd (passengerClass2nd = -1.280570) : Le coefficient est négatif, ce qui montre que les passagers de deuxième classe avaient une probabilité de survie plus faible que ceux de première classe (catégorie de référence). Cet effet est significatif (p < 0.001).**
+
+**Classe 3rd (passengerClass3rd = -2.289661) : Le coefficient négatif et encore plus important montre que les passagers de troisième classe avaient une probabilité de survie encore plus faible que ceux de première classe. Ce résultat est également très significatif (p < 0.001)**
+
+
+## Création d’un Package R avec des fonctions d’Analyse
+
+Dans R/analyse_titanic.R, ajoute une fonction  pour calculer les taux de survie en fonction du sexe 
+
+```{r}
+library(dplyr)
+taux_survie_sex <- function(data) {
+  data %>%
+    group_by(sex) %>%
+    summarize(TauxSurvie = sum(survived == "yes") / n())
+}
+taux_survie_sex(df)
+```
+
+```{r}
+taux_survie_class <- function(data) {
+  data %>%
+    group_by(passengerClass) %>%
+    summarize(TauxSurvie = sum(survived == "yes") / n())
+}
+taux_survie_class(df)
+```
+
+
+## Rapport Final et Partage
+
+- devtools::create("TitanicPckg")
+- creation du fichier taux.R avec les fonctions
+- documentation: en-tete +  save et devtools::document("TitanicPckg")
+- devtools::build("TitanicPckg")
+- devtools::install("TitanicPckg")
+
+### Utilisation des fonctions de mon package
+
+```{r}
+library(TitanicPckg)
+taux_survie_sex(df)
+```
+
+```{r}
+TitanicPckg::taux_survie_class(df)
+```
+
+
