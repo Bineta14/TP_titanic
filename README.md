@@ -21,7 +21,7 @@ Voici les étapes :
 
 Puis copier le token généré et garder le quelque part (il sera à coller pendant le premier push ou clone à la place du password)
 
-**Une fois le token généré, on peut l'éditerait pour donner les bons accès(read, write) au repertoire concerné**
+**Une fois le token généré, on peut l'éditer pour donner les bons accès(read, write) au repertoire concerné**
 
 <img width="899" height="428" alt="image" src="https://github.com/user-attachments/assets/ac78a01a-69b8-4735-bd93-d4ce7a21da54" />
 
