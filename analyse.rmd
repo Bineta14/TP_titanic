@@ -36,7 +36,9 @@ summary(data)
 ```
 
 
+# Interprétation des résultats
 
+# Conclusion 
 
 
 
