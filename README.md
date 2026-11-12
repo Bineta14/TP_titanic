@@ -28,6 +28,22 @@ Puis copier le token généré et garder le quelque part (il sera à coller pend
 
 
 
+#' Calcul du taux de survie en fonction de la variable donnée en entrée
+#' 
+#' @author Bineta
+#' @param data jeuu de données
+#' @param variable colonne donnée
+#' 
+#' @examples 
+#' taux_survie(data,'passengerClass')
+#' taux_survie(data,'sex')
+#' 
+#' @export
+
+
+
+
+
 
 taux_survie <- function(data,variable) {
   library(dplyr)
