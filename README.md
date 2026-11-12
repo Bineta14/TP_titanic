@@ -26,3 +26,11 @@ Puis copier le token généré et garder le quelque part (il sera à coller pend
 <img width="899" height="428" alt="image" src="https://github.com/user-attachments/assets/ac78a01a-69b8-4735-bd93-d4ce7a21da54" />
 
 
+
+
+
+taux_survie <- function(data,variable) {
+  library(dplyr)
+  data %>%
+    group_by(data[,variable]) %>%
+    summarize(TauxSurvie = sum(survived == "yes") / n())
