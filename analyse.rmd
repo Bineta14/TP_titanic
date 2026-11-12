@@ -1,0 +1,42 @@
+---
+title: "analyse"
+author: "Bineta FAYE"
+date: "2026-11-12"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## TP analyse   
+
+
+### Présentation du jeu de données
+
+```{r}
+library(carData)
+
+data<-TitanicSurvival
+
+head(data)
+
+```
+
+ce jeu de données contients des psaagers du titanic...
+
+Nous trouvons le sex, l'age, le status de survivant ou non....
+
+
+
+#Stats descriptives
+
+```{r}
+summary(data)
+```
+
+
+
+
+
+
